@@ -1,4 +1,3 @@
-
 class Personne:
     def __init__(self, nom, age):
         self.nom = nom
@@ -11,7 +10,7 @@ class Personne:
 
 class Salarie(Personne):
     def __init__(self, nom, age, numeroSomme, salaire):
-        super().__init__(nom, age)
+        Personne.__init__(self, nom, age)
         self.numeroSomme = numeroSomme
         self.salaire = salaire
 
@@ -19,14 +18,14 @@ class Salarie(Personne):
         return self.salaire
 
     def afficherInfos(self):
-        super().afficherInfos()
+        Personne.afficherInfos(self)
         print("Numero Somme:", self.numeroSomme)
         print("Salaire:", self.salaire)
 
 
 class Etudiant(Personne):
     def __init__(self, nom, age, cne, notes):
-        super().__init__(nom, age)
+        Personne.__init__(self, nom, age)
         self.cne = cne
         self.notes = notes
 
@@ -34,21 +33,22 @@ class Etudiant(Personne):
         return sum(self.notes) / len(self.notes)
 
     def afficherInfos(self):
-        super().afficherInfos()
+        Personne.afficherInfos(self)
         print("CNE:", self.cne)
         print("Notes:", self.notes)
 
 
 class Doctorant(Salarie, Etudiant):
     def __init__(self, nom, age, numeroSomme, salaire, cne, notes, departement, anneeInscription):
-        super().__init__(nom, age, numeroSomme, salaire)
-        self.cne = cne
-        self.notes = notes
+        Salarie.__init__(self, nom, age, numeroSomme, salaire)
+        Etudiant.__init__(self, nom, age, cne, notes)
         self.departement = departement
         self.anneeInscription = anneeInscription
 
     def afficherInfos(self):
-        super().afficherInfos()
+        Personne.afficherInfos(self)
+        print("Numero Somme:", self.numeroSomme)
+        print("Salaire:", self.salaire)
         print("CNE:", self.cne)
         print("Notes:", self.notes)
         print("Departement:", self.departement)
