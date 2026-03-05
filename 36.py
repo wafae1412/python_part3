@@ -8,6 +8,7 @@ class Personne:
         print("Nom:", self.nom)
         print("Age:", self.age)
 
+
 class Salarie(Personne):
     def __init__(self, nom, age, numeroSomme, salaire):
         super().__init__(nom, age)
@@ -40,20 +41,18 @@ class Etudiant(Personne):
 
 class Doctorant(Salarie, Etudiant):
     def __init__(self, nom, age, numeroSomme, salaire, cne, notes, departement, anneeInscription):
-        Salarie.__init__(self, nom, age, numeroSomme, salaire)
-        Etudiant.__init__(self, nom, age, cne, notes)
+        super().__init__(nom, age, numeroSomme, salaire)
+        self.cne = cne
+        self.notes = notes
         self.departement = departement
         self.anneeInscription = anneeInscription
 
     def afficherInfos(self):
-        Personne.afficherInfos(self)
-        print("Numero Somme:", self.numeroSomme)
-        print("Salaire:", self.salaire)
+        super().afficherInfos()
         print("CNE:", self.cne)
         print("Notes:", self.notes)
         print("Departement:", self.departement)
         print("Annee Inscription:", self.anneeInscription)
-
 
 
 d = Doctorant("Wafae", 25, "NS123", 5000, "CNE456", [12, 14, 16], "Informatique", 2023)
